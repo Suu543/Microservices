@@ -4,7 +4,7 @@ const { randomBytes } = require("crypto");
 
 const app = express();
 
-// A kind of repository
+// TestCase
 const posts = {};
 
 app.use(express.json());
