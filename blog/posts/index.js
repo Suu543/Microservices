@@ -2,6 +2,7 @@ const express = require("express");
 // Generate Random Id
 const { randomBytes } = require("crypto");
 const cors = require("cors");
+const axios = require("axios");
 
 const app = express();
 
@@ -15,7 +16,7 @@ app.get("/posts", (req, res) => {
   res.send(posts);
 });
 
-app.post("/posts", (req, res) => {
+app.post("/posts", async (req, res) => {
   const id = randomBytes(4).toString("hex");
   const { title } = req.body;
 
@@ -24,9 +25,22 @@ app.post("/posts", (req, res) => {
     title,
   };
 
-  console.log("posts", posts);
+  await axios.post("http://localhost:4005/events", {
+    type: "PostCreated",
+    data: {
+      id,
+      title,
+    },
+  });
+  // console.log("posts", posts);
   // status: 201 - created
   res.status(201).send(posts[id]);
+});
+
+app.post("/events", (req, res) => {
+  console.log("Received Event", req.body.type);
+
+  res.send({})
 });
 
 app.listen(4000, () => {
