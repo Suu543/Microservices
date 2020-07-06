@@ -1,6 +1,7 @@
 const express = require("express");
 // Generate Random Id
 const { randomBytes } = require("crypto");
+const cors = require("cors");
 
 const app = express();
 
@@ -8,6 +9,7 @@ const app = express();
 const posts = {};
 
 app.use(express.json());
+app.use(cors());
 
 app.get("/posts", (req, res) => {
   res.send(posts);
@@ -22,6 +24,7 @@ app.post("/posts", (req, res) => {
     title,
   };
 
+  console.log("posts", posts);
   // status: 201 - created
   res.status(201).send(posts[id]);
 });
