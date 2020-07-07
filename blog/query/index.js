@@ -9,16 +9,6 @@ app.use(cors());
 
 const posts = {};
 
-// posts === {
-//     'ji2324: {
-//         id: "21313",
-//         title: "post title",
-//         comments: [
-//             {id: 'adasds', content: "adasd!"}
-//         ]
-//     }
-// }
-
 app.get("/posts", (req, res) => {
   res.send(posts);
 });
@@ -46,3 +36,13 @@ app.post("/events", (req, res) => {
 app.listen(4002, () => {
   console.log("Listening on 4002");
 });
+
+// posts === {
+//     'ji2324: {
+//         id: "21313",
+//         title: "post title",
+//         comments: [
+//             {id: 'adasds', content: "adasd!"}
+//         ]
+//     }
+// }
